@@ -53,9 +53,8 @@ export default function StatsPage() {
 
       <div style={{ padding: '14px' }}>
         {/* Overview grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10, marginBottom: 16 }}>
           <StatBox label="Total sightings" value={stats.total} />
-          <StatBox label="Real AI analyses" value={stats.apiCount} sub={`${stats.total ? Math.round(stats.apiCount/stats.total*100) : 0}% of total`} color="#2d7a4f" />
           <StatBox label="Avg confidence" value={stats.avgConfidence + '%'} color={confColor(stats.avgConfidence)} />
           <StatBox label="Avg breed conf." value={stats.avgBreedConf + '%'} color={confColor(stats.avgBreedConf)} />
         </div>
@@ -74,12 +73,6 @@ export default function StatsPage() {
                 <div style={{ fontSize: 10, color: b.color, fontWeight: 600, marginTop: 2 }}>{b.label}</div>
               </div>
             ))}
-          </div>
-          <div style={{ fontSize: 12, color: '#888', fontStyle: 'italic' }}>
-            {stats.apiCount === 0
-              ? 'No real API analyses yet — add your ANTHROPIC_API_KEY to see real confidence scores'
-              : `Based on ${stats.apiCount} real API call${stats.apiCount > 1 ? 's' : ''} and ${stats.mockCount} mock result${stats.mockCount !== 1 ? 's' : ''}`
-            }
           </div>
         </div>
 
@@ -103,7 +96,7 @@ export default function StatsPage() {
                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>
                   <thead>
                     <tr style={{ borderBottom: '2px solid #f0f0e8' }}>
-                      {['ID', 'Breed', 'Conf.', 'Breed conf.', 'Source'].map(h => (
+                      {['ID', 'Breed', 'Conf.', 'Breed conf.'].map(h => (
                         <th key={h} style={{ padding: '6px 8px', textAlign: 'left', color: '#888', fontWeight: 600 }}>{h}</th>
                       ))}
                     </tr>
@@ -115,11 +108,6 @@ export default function StatsPage() {
                         <td style={{ padding: '7px 8px', color: '#444', maxWidth: 120, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{d.breed}</td>
                         <td style={{ padding: '7px 8px', fontWeight: 700, color: confColor(d.confidence) }}>{d.confidence}%</td>
                         <td style={{ padding: '7px 8px', fontWeight: 700, color: confColor(d.breed_confidence) }}>{d.breed_confidence}%</td>
-                        <td style={{ padding: '7px 8px' }}>
-                          <span style={{ fontSize: 11, background: d.analysis_source === 'api' ? '#eef6f1' : '#fffbe6', color: d.analysis_source === 'api' ? '#2d7a4f' : '#7a6000', padding: '2px 6px', borderRadius: 10, fontWeight: 600 }}>
-                            {d.analysis_source === 'api' ? 'API' : 'mock'}
-                          </span>
-                        </td>
                       </tr>
                     ))}
                   </tbody>

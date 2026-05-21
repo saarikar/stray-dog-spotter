@@ -88,7 +88,6 @@ export default function ProfilePage({ onSignOut }) {
           <div style={{ fontSize: 13, fontWeight: 700, color: '#555', marginBottom: 12, textTransform: 'uppercase', letterSpacing: '0.05em' }}>About this project</div>
           {[
             ['Project', 'Stray Dogs Directory'],
-            ['Model', 'Anthropic claude-opus-4-5 Vision'],
             ['Database', isDemoMode ? 'In-memory (demo)' : 'Supabase PostgreSQL'],
             ['Breeds supported', '13 Indian dog types'],
             ['Maps', 'OpenStreetMap / Leaflet'],

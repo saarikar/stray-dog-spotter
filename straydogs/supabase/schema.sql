@@ -45,7 +45,13 @@ create table if not exists dogs (
   area text,
   city text,
   photo_url text,
-  analysis_source text default 'mock',  -- 'api' | 'mock' | 'api_error'
+  vaccinated boolean default false,
+  vaccination_notes text,
+  status text default 'sighted',        -- 'sighted' | 'being_rescued' | 'in_shelter' | 'reunited'
+  report_type text default 'stray',     -- 'stray' | 'lost_pet'
+  pet_name text,
+  owner_phone text,
+  date_lost text,
   feature_vector float8[],              -- 128-dim embedding from MobileNetV2, stored by backend
   created_at timestamptz default now()
 );
@@ -82,9 +88,9 @@ create policy "Reporter can update own dog" on dogs for update using (auth.uid()
 create policy "Reporter can delete own dog" on dogs for delete using (auth.uid() = reporter_id);
 
 -- Seed data
-insert into dogs (breed, color, size, sex, age, injured, confidence, breed_confidence, reporter_name, lat, lng, area, city, analysis_source)
+insert into dogs (breed, color, size, sex, age, injured, confidence, breed_confidence, reporter_name, lat, lng, area, city, vaccinated, vaccination_notes)
 values
-  ('Indian Pariah Dog','tan','medium','male','adult (1.5–7 yr)',false,87,72,'Arun K.',13.0415,80.2337,'T. Nagar','Chennai','api'),
-  ('Labrador mix','black & white','large','female','adult (1.5–7 yr)',false,91,68,'Meena S.',13.0012,80.2565,'Adyar','Chennai','api'),
-  ('Indian Spitz mix','white','small','female','juvenile (6–18 mo)',true,79,61,'Priya N.',13.0569,80.2425,'T. Nagar','Chennai','mock'),
-  ('Indian Pariah Dog','brown','medium','male','senior (7+ yr)',false,83,80,'Ravi M.',12.9823,80.2209,'Velachery','Chennai','api');
+  ('Indian Pariah Dog','tan','medium','male','adult (1.5–7 yr)',false,87,72,'Arun K.',13.0415,80.2337,'T. Nagar','Chennai',false,null),
+  ('Labrador mix','black & white','large','female','adult (1.5–7 yr)',false,91,68,'Meena S.',13.0012,80.2565,'Adyar','Chennai',true,'Rabies – Mar 2024'),
+  ('Indian Spitz mix','white','small','female','juvenile (6–18 mo)',true,79,61,'Priya N.',13.0569,80.2425,'T. Nagar','Chennai',false,null),
+  ('Indian Pariah Dog','brown','medium','male','senior (7+ yr)',false,83,80,'Ravi M.',12.9823,80.2209,'Velachery','Chennai',false,null);
