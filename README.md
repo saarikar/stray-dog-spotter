@@ -30,7 +30,7 @@ A community-driven stray dog directory for Indian cities. Spot, report, and trac
 - **Python 3.10+**
 - **Node.js 18+**
 - A [Supabase](https://supabase.com) project (free tier is fine)
-- `stray_dog_model.h5` — the custom MobileNetV2 weights file (not in repo; place it in `straydogs-backend/`)
+- `stray_dog_model.h5` — included in the repo under `straydogs-backend/`
 
 ---
 
@@ -61,9 +61,9 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_SERVICE_KEY=your-service-role-key
 ```
 
-### Place the model file
+### Model files
 
-Copy your trained `stray_dog_model.h5` into `straydogs-backend/`. The `yolov8n.pt` weights are downloaded automatically by Ultralytics on first run.
+`stray_dog_model.h5` is included in the repo. The `yolov8n.pt` weights are downloaded automatically by Ultralytics on first run.
 
 ### Install dependencies
 
