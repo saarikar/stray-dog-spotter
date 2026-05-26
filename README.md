@@ -4,7 +4,8 @@ A community-driven stray dog directory for Indian cities. Spot, report, and trac
 
 ## Features
 
-- **Dog feed** — browse all reported sightings with breed, location, and status
+- **Home** — landing page with quick actions and recent activity
+- **Dog search** — browse and filter sightings by breed, colour, size, or upload a photo for visual similarity matching
 - **Report a dog** — photograph a stray or lost pet; AI identifies the breed and checks for duplicates
 - **Status tracking** — mark dogs as sighted / being rescued / in shelter / reunited
 - **Lost pet flow** — report a missing pet with owner contact details
@@ -140,7 +141,9 @@ straydogs_main/
 │   │   │   ├── supabase.js     # Supabase client
 │   │   │   └── vision.js       # Anthropic / mock AI calls
 │   │   └── pages/
-│   │       ├── Feed.jsx        # Dog directory & search
+│   │       ├── Home.jsx        # Landing page
+│   │       ├── Feed.jsx        # Browse & filter dog sightings
+│   │       ├── Search.jsx      # Visual similarity search
 │   │       ├── Report.jsx      # Report a dog (camera + form)
 │   │       ├── Dog.jsx         # Individual dog detail
 │   │       ├── Stats.jsx       # City statistics
@@ -169,6 +172,7 @@ straydogs_main/
 | `POST` | `/analyse-batch` | Analyse multiple images |
 | `POST` | `/save` | Save a dog record + feature vector to Supabase |
 | `GET` | `/db` | Fetch all dogs from Supabase |
+| `POST` | `/search` | Visual + attribute search with geo-ranking (haversine, 70% similarity + 30% proximity) |
 
 ---
 
